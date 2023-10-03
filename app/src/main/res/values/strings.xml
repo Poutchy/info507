@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="main_vue_text_view_1">Insert</string>
+    <string name="main_vue_text_view_2">Memory</string>
+    <string name="main_vue_text_view_3">HERE</string>
+    <string name="main_menu_text_view_1">LOOK</string>
+    <string name="main_menu_text_view_2">GET</string>
+    <string name="main_menu_text_view_3">ADD</string>
 </resources>
