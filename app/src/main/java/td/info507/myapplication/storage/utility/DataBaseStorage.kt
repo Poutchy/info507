@@ -37,7 +37,22 @@ abstract class DataBaseStorage<T>(private val helper: SQLiteOpenHelper, private 
     }
 
     override fun findAll(): List<T> {
-        TODO("Not yet implemented")
+        var compt = 0
+        var obj: MutableList<T> = mutableListOf()
+        val cursor = helper.readableDatabase.query(
+            table,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+        while (cursor.moveToNext()) {
+            obj[compt] = cursorToObject(cursor);
+        }
+        cursor.close();
+        return obj;
     }
 
     override fun update(id: Int, obj: T) {

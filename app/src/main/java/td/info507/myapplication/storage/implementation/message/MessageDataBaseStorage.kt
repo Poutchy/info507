@@ -1,11 +1,10 @@
-package td.info507.myapplication.storage.implementation.Message
+package td.info507.myapplication.storage.implementation.message
 
 import android.content.ContentValues
 import android.database.Cursor
 import td.info507.myapplication.helper.DataBaseHelper
 import td.info507.myapplication.model.ImageMessage
 import td.info507.myapplication.model.LinkMessage
-import td.info507.myapplication.model.Memory
 import td.info507.myapplication.model.Message
 import td.info507.myapplication.model.TextMessage
 import td.info507.myapplication.storage.utility.DataBaseStorage
@@ -27,22 +26,22 @@ class MessageDataBaseStorage(helper: DataBaseHelper) : DataBaseStorage<Message>(
     }
 
     override fun cursorToObject(cursor: Cursor): Message {
-        val type = cursor.getString(MessageDataBaseStorage.TYPE)
+        val type = cursor.getString(TYPE)
         if (type == "image") {
             return ImageMessage(
-                cursor.getInt(MessageDataBaseStorage.ID),
-                cursor.getInt(MessageDataBaseStorage.MEMORY),
-                cursor.getString(MessageDataBaseStorage.CONTENT))
+                cursor.getInt(ID),
+                cursor.getInt(MEMORY),
+                cursor.getString(CONTENT))
         } else if (type =="link"){
             return LinkMessage(
-                cursor.getInt(MessageDataBaseStorage.ID),
-                cursor.getInt(MessageDataBaseStorage.MEMORY),
-                cursor.getString(MessageDataBaseStorage.CONTENT))
+                cursor.getInt(ID),
+                cursor.getInt(MEMORY),
+                cursor.getString(CONTENT))
         } else {
             return TextMessage(
-                cursor.getInt(MessageDataBaseStorage.ID),
-                cursor.getInt(MessageDataBaseStorage.MEMORY),
-                cursor.getString(MessageDataBaseStorage.CONTENT))
+                cursor.getInt(ID),
+                cursor.getInt(MEMORY),
+                cursor.getString(CONTENT))
         }
     }
 }

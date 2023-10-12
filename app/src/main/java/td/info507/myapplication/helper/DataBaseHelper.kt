@@ -12,7 +12,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, "myapp.db", n
         db.execSQL(
             "CREATE TABLE Memory (" +
                     "${BaseColumns._ID} INTEGER," +
-                    "${Memory.LASTID} INTEGER," +
+                    "${Memory.NAME} STRING," +
+                    "${Memory.DATE} DATE," +
                     "PRIMARY KEY(${BaseColumns._ID})" +
                     ")"
         )

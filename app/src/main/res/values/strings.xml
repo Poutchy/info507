@@ -6,4 +6,5 @@
     <string name="main_menu_text_view_1">LOOK</string>
     <string name="main_menu_text_view_2">GET</string>
     <string name="main_menu_text_view_3">ADD</string>
+    <string name="user_text">Moi</string>
 </resources>
