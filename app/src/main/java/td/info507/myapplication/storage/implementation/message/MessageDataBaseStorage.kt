@@ -1,6 +1,7 @@
 package td.info507.myapplication.storage.implementation.message
 
 import android.content.ContentValues
+import android.content.Context
 import android.database.Cursor
 import td.info507.myapplication.helper.DataBaseHelper
 import td.info507.myapplication.model.ImageMessage
@@ -9,7 +10,7 @@ import td.info507.myapplication.model.Message
 import td.info507.myapplication.model.TextMessage
 import td.info507.myapplication.storage.utility.DataBaseStorage
 
-class MessageDataBaseStorage(helper: DataBaseHelper) : DataBaseStorage<Message>(helper, "Message") {
+class MessageDataBaseStorage(context: Context) : DataBaseStorage<Message>(DataBaseHelper(context), "Message") {
     companion object {
         const val ID = 0
         const val MEMORY = 1

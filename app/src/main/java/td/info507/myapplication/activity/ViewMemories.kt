@@ -4,15 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import td.info507.myapplication.R
 import td.info507.myapplication.adapter.MemoryAdapter
-import td.info507.myapplication.storage.MemoryStorage
 
 class ViewMemories : AppCompatActivity() {
     private lateinit var list: RecyclerView
-    private lateinit var refreshLayout: SwipeRefreshLayout
     companion object {
         const val MEMORY_ID = "MEMORY_ID"
     }
@@ -32,6 +30,14 @@ class ViewMemories : AppCompatActivity() {
             override fun onLongItemClick(view: View): Boolean {
                 TODO("Not yet implemented")
             }
+        }
+
+        var quit: Button = findViewById(R.id.memory_list_quit)
+        var add: Button = findViewById(R.id.memory_list_add)
+
+        add.setOnClickListener {
+            val intent = Intent(applicationContext, AddMenu::class.java)
+            startActivity(intent)
         }
     }
 }

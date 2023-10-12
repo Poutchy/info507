@@ -18,19 +18,19 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button_main_menu_1"
+                android:id="@+id/main_menu_look"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_menu_text_view_1" />
 
             <Button
-                android:id="@+id/button_main_menu_2"
+                android:id="@+id/main_menu_get"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_menu_text_view_2" />
 
             <Button
-                android:id="@+id/button_main_menu_3"
+                android:id="@+id/main_menu_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_menu_text_view_3" />
