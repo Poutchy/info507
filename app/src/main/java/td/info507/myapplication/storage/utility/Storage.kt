@@ -7,6 +7,7 @@ interface Storage<T> {
     fun size() : Int
 
     fun find(id: Int) : T?
+    fun findAllById(id: Int) : List<T>
 
     fun findAll() : List<T>
 

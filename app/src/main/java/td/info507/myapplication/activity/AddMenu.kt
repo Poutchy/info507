@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import td.info507.myapplication.R
+import td.info507.myapplication.model.Memory
+import td.info507.myapplication.storage.MemoryStorage
 import java.util.Locale
 
 
@@ -25,5 +27,25 @@ class AddMenu : AppCompatActivity() {
 
         var cancel: FloatingActionButton = findViewById(R.id.creation_cancel_button)
         var accept: FloatingActionButton = findViewById(R.id.creation_accept_button)
+
+        accept.setOnClickListener {
+            create_memory(date.text.toString(), name.text.toString())
+        }
+        cancel.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun create_memory(d: String, n: String) {
+        val elems = MemoryStorage.get(applicationContext).findAll()
+
+        val newId = if (elems.isNotEmpty()) {
+            elems.maxByOrNull { it.id }!!.id + 1
+        } else {
+            1
+        }
+
+        MemoryStorage.get(applicationContext).insert(Memory(newId, n, d))
+        finish()
     }
 }

@@ -1,17 +1,27 @@
 package td.info507.myapplication.adapter
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import td.info507.myapplication.R
+import td.info507.myapplication.model.Message
 import td.info507.myapplication.storage.MessageStorage
 
-abstract class MessageAdapter(private val context: Context): RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
+abstract class MessageAdapter(
+    var messages: ArrayList<Message>,
+    private val context: Context
+): RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
     class MessageHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         val content: TextView = itemView.findViewById(R.id.message_content)
+        val image: ImageView = itemView.findViewById(R.id.message_image)
+        val link: TextView = itemView.findViewById(R.id.message_link)
     }
 
     abstract fun onItemClick(view: View)
@@ -25,12 +35,24 @@ abstract class MessageAdapter(private val context: Context): RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: MessageHolder, position: Int) {
-        val message = MessageStorage.get(context).findAll().get(position)
+        val message = messages[position]
         holder.itemView.tag = message.id
-        holder.content.text = message.content
+        when (message.type) {
+            "image" -> {
+                Log.d("TEST", message.content)
+                val bytes = Base64.decode(message.content, 0)
+                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                holder.image.setImageBitmap(bitmap)
+            }
+            "link" -> {
+                holder.link.text = message.content
+            }
+            else -> holder.content.text = message.content
+        }
     }
 
     override fun getItemCount(): Int {
-        return MessageStorage.get(context).size()
+        Log.d("TOT MESS ADAPT", messages.size.toString())
+        return messages.size
     }
 }

@@ -27,13 +27,13 @@
                 android:id="@+id/main_menu_get"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/main_menu_text_view_2" />
+                android:text="@string/text_get_view" />
 
             <Button
                 android:id="@+id/main_menu_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/main_menu_text_view_3" />
+                android:text="@string/text_add_button" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

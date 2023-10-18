@@ -11,19 +11,17 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, "myapp.db", n
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
             "CREATE TABLE Memory (" +
-                    "${BaseColumns._ID} INTEGER," +
+                    "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "${Memory.NAME} STRING," +
-                    "${Memory.DATE} DATE," +
-                    "PRIMARY KEY(${BaseColumns._ID})" +
+                    "${Memory.DATE} DATE" +
                     ")"
         )
         db.execSQL(
                 "CREATE TABLE Message (" +
-                        "${BaseColumns._ID} INTEGER," +
+                        "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "${Message.MEMORY} INTEGER," +
                         "${Message.CONTENT} TEXT," +
                         "${Message.TYPE} STRING," +
-                        "PRIMARY KEY(${BaseColumns._ID})," +
                         "FOREIGN KEY (${Message.MEMORY}) REFERENCES Memory(${BaseColumns._ID}) ON DELETE CASCADE"+
                         ")"
         )

@@ -3,6 +3,7 @@ package td.info507.myapplication.storage.implementation.message
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.provider.BaseColumns
 import td.info507.myapplication.helper.DataBaseHelper
 import td.info507.myapplication.model.ImageMessage
 import td.info507.myapplication.model.LinkMessage
@@ -19,7 +20,7 @@ class MessageDataBaseStorage(context: Context) : DataBaseStorage<Message>(DataBa
     }
     override fun objectToValues(obj: Message): ContentValues {
         val values = ContentValues()
-        values.put(Message.ID, obj.id)
+        values.put(BaseColumns._ID, obj.id)
         values.put(Message.MEMORY, obj.memory)
         values.put(Message.CONTENT, obj.content)
         values.put(Message.TYPE, obj.type)

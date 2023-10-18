@@ -3,7 +3,7 @@ package td.info507.myapplication.storage.implementation.memory
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import android.database.sqlite.SQLiteOpenHelper
+import android.provider.BaseColumns
 import td.info507.myapplication.helper.DataBaseHelper
 import td.info507.myapplication.model.Memory
 import td.info507.myapplication.storage.utility.DataBaseStorage
@@ -16,7 +16,7 @@ class MemoryDataBaseStorage(context: Context) : DataBaseStorage<Memory>(DataBase
     }
     override fun objectToValues(obj: Memory): ContentValues {
         val values = ContentValues()
-        values.put(Memory.ID, obj.id)
+        values.put(BaseColumns._ID, obj.id)
         values.put(Memory.NAME, obj.name)
         values.put(Memory.DATE, obj.date)
         return values
@@ -25,4 +25,5 @@ class MemoryDataBaseStorage(context: Context) : DataBaseStorage<Memory>(DataBase
     override fun cursorToObject(cursor: Cursor): Memory {
         return Memory(cursor.getInt(ID), cursor.getString(NAME), cursor.getString(DATE))
     }
+
 }

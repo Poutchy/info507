@@ -4,7 +4,10 @@
     <string name="main_vue_text_view_2">Memory</string>
     <string name="main_vue_text_view_3">HERE</string>
     <string name="main_menu_text_view_1">LOOK</string>
-    <string name="main_menu_text_view_2">GET</string>
-    <string name="main_menu_text_view_3">ADD</string>
+    <string name="text_get_view">GET</string>
+    <string name="text_add_button">ADD</string>
     <string name="user_text">Moi</string>
+    <string name="insert_text_here">Insert text here</string>
+    <string name="name">Name</string>
+    <string name="quit_button_text">QUIT</string>
 </resources>

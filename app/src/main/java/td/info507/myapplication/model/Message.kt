@@ -1,7 +1,7 @@
 package td.info507.myapplication.model
 
 abstract class Message (
-    val id: Int,
+    var id: Int,
     val memory: Int,
     val content: String,
     val type: String
