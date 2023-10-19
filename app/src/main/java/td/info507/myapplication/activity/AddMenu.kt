@@ -1,5 +1,6 @@
 package td.info507.myapplication.activity
 
+import android.app.Activity
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -18,15 +19,15 @@ class AddMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_menu)
 
-        var date: TextView = findViewById(R.id.creation_date)
+        val date: TextView = findViewById(R.id.creation_date)
         val dateF = SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault())
 
         date.text = dateF.format(Calendar.getInstance().time)
 
-        var name: EditText = findViewById(R.id.creation_name)
+        val name: EditText = findViewById(R.id.creation_name)
 
-        var cancel: FloatingActionButton = findViewById(R.id.creation_cancel_button)
-        var accept: FloatingActionButton = findViewById(R.id.creation_accept_button)
+        val cancel: FloatingActionButton = findViewById(R.id.creation_cancel_button)
+        val accept: FloatingActionButton = findViewById(R.id.creation_accept_button)
 
         accept.setOnClickListener {
             create_memory(date.text.toString(), name.text.toString())
@@ -46,6 +47,7 @@ class AddMenu : AppCompatActivity() {
         }
 
         MemoryStorage.get(applicationContext).insert(Memory(newId, n, d))
+        setResult(Activity.RESULT_OK)
         finish()
     }
 }

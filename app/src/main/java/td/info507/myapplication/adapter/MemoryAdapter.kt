@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import td.info507.myapplication.model.Memory
 
-abstract class MemoryAdapter(private val context: Context, private val memories: List<Memory>) : RecyclerView.Adapter<MemoryAdapter.MemoryHolder>() {
+abstract class MemoryAdapter(var memories: List<Memory>) : RecyclerView.Adapter<MemoryAdapter.MemoryHolder>() {
 
     class MemoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.memory_name_list)

@@ -1,9 +1,7 @@
 package td.info507.myapplication.adapter
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import td.info507.myapplication.R
 import td.info507.myapplication.model.Message
-import td.info507.myapplication.storage.MessageStorage
 
 abstract class MessageAdapter(
     var messages: ArrayList<Message>,
-    private val context: Context
 ): RecyclerView.Adapter<MessageAdapter.MessageHolder>() {
     class MessageHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         val content: TextView = itemView.findViewById(R.id.message_content)
@@ -39,7 +35,6 @@ abstract class MessageAdapter(
         holder.itemView.tag = message.id
         when (message.type) {
             "image" -> {
-                Log.d("TEST", message.content)
                 val bytes = Base64.decode(message.content, 0)
                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                 holder.image.setImageBitmap(bitmap)
@@ -52,7 +47,6 @@ abstract class MessageAdapter(
     }
 
     override fun getItemCount(): Int {
-        Log.d("TOT MESS ADAPT", messages.size.toString())
         return messages.size
     }
 }

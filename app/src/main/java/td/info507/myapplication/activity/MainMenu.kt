@@ -11,9 +11,9 @@ class MainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
-        var look: Button = findViewById(R.id.main_menu_look)
-        var get: Button = findViewById(R.id.main_menu_get)
-        var add: Button = findViewById(R.id.main_menu_add)
+        val look: Button = findViewById(R.id.main_menu_look)
+        val get: Button = findViewById(R.id.main_menu_get)
+        val add: Button = findViewById(R.id.main_menu_add)
 
         look.setOnClickListener{
             val intent = Intent(applicationContext, ViewMemories::class.java)

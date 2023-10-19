@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
 import android.util.Base64
-import android.util.Log
 import android.util.Size
 import android.view.View
 import android.widget.EditText
@@ -33,10 +32,8 @@ class ViewMemory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_memory)
 
-        Log.d("ON CREATE ACT MEM","ON CREATE ACT MEM")
-
         list = findViewById(R.id.message_list)
-        adapter = object : MessageAdapter((MessageStorage.get(applicationContext).findAllById(intent.getIntExtra(ViewMemories.MEMORY_ID, 0)) as ArrayList<Message>), applicationContext) {
+        adapter = object : MessageAdapter((MessageStorage.get(applicationContext).findAllById(intent.getIntExtra(ViewMemories.MEMORY_ID, 0)) as ArrayList<Message>)) {
             override fun onItemClick(view: View) {
             }
 
@@ -47,7 +44,7 @@ class ViewMemory : AppCompatActivity() {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(this)
 
-        var creation_link: ImageButton = findViewById(R.id.creation_message_link)
+        val creation_link: ImageButton = findViewById(R.id.creation_message_link)
         val creation_text: EditText = findViewById(R.id.creation_message_text)
         val creation_image: ImageButton = findViewById(R.id.creation_message_image)
         val send: ImageButton = findViewById(R.id.creation_message_send)
@@ -112,7 +109,6 @@ class ViewMemory : AppCompatActivity() {
         m.id = newId
         MessageStorage.get(applicationContext).insert(m)
         adapter.messages.add(m)
-        Log.d("ALL MESSAGES", adapter.messages.toString())
         list.adapter?.notifyItemInserted(adapter.messages.size -1)
     }
 
