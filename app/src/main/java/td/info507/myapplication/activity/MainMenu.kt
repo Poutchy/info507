@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import td.info507.myapplication.R
+import td.info507.myapplication.request.MemoryRequest
 
 class MainMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +22,7 @@ class MainMenu : AppCompatActivity() {
         }
 
         get.setOnClickListener {
-            val intent = Intent(applicationContext, ImportMenu::class.java)
-            startActivity(intent)
+            MemoryRequest(applicationContext)
         }
 
         add.setOnClickListener {

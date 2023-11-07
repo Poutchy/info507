@@ -6,11 +6,14 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+import td.info507.myapplication.model.LinkMessage
 import td.info507.myapplication.model.Memory
-import td.info507.myapplication.model.Updatable
+import td.info507.myapplication.model.Message
+import td.info507.myapplication.model.TextMessage
 import td.info507.myapplication.storage.MemoryStorage
+import td.info507.myapplication.storage.MessageStorage
 
-class MemoryRequest (private val context: Context, updatable: Updatable) {
+class MemoryRequest (private val context: Context) {
     companion object {
         private const val URL = "http://51.68.91.213/gr-1-2/memories.json"
     }
@@ -23,7 +26,6 @@ class MemoryRequest (private val context: Context, updatable: Updatable) {
             null,
             { res ->
                 refresh(res)
-                updatable.update()
                 Toast.makeText(context, "La liste de souvenir a été récupérée avec succès", Toast.LENGTH_SHORT).show() },
             { err ->
                 Toast.makeText(context, "Une erreur s'est produite", Toast.LENGTH_SHORT).show()
@@ -34,27 +36,52 @@ class MemoryRequest (private val context: Context, updatable: Updatable) {
     }
 
     private fun refresh(json: JSONObject) {
-        delete()
         insert(json)
-    }
-
-    private fun delete() {
-        for (memory in MemoryStorage.get(context).findAll()) {
-            MemoryStorage.get(context).delete(memory.id)
-        }
     }
 
     private fun insert(json: JSONObject) {
         val memories = json.getJSONArray("memory")
         for (i in 0 until memories.length()) {
             val memory = memories.getJSONObject(i)
+            val elems = MemoryStorage.get(context).findAll()
+
+            val newId = if (elems.isNotEmpty()) {
+                elems.maxByOrNull { it.id }!!.id + 1
+            } else {
+                1
+            }
             MemoryStorage.get(context).insert(
                 Memory(
-                    i,
+                    newId,
                     memory.getString(Memory.NAME),
                     memory.getString(Memory.DATE)
                 )
             )
+            val messages = memory.getJSONArray("messages")
+            for (j in 0 until messages.length()) {
+                val message = messages.getJSONObject(j)
+                val mess = MessageStorage.get(context).findAll()
+                val newIdMessage = if (mess.isNotEmpty()) {
+                    elems.maxByOrNull { it.id }!!.id + 1
+                } else {
+                    1
+                }
+                val type = message.getString("type")
+                val retour: Message = if (type == "link") {
+                    LinkMessage(
+                        newIdMessage,
+                        newId,
+                        message.getString("text"))
+                } else {
+                    TextMessage(
+                        newIdMessage,
+                        newId,
+                        message.getString("text"))
+                }
+                MessageStorage.get(context).insert(
+                    retour
+                )
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
 import android.util.Base64
+import android.util.Log
 import android.util.Size
 import android.view.View
 import android.widget.EditText
@@ -63,32 +64,39 @@ class ViewMemory : AppCompatActivity() {
     }
 
     private fun selectImage() {
-        val intent = Intent(Intent.ACTION_PICK, Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_PICK, Media.INTERNAL_CONTENT_URI)
         resultImageLauncher.launch(intent)
     }
 
-    private var resultImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {res ->
+    private var resultImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    { res ->
         if (res.resultCode == Activity.RESULT_OK) {
             val uri: Uri = res.data!!.data!!
             val bitmap = if (Build.VERSION.SDK_INT >= 29) {
+                Log.d("Informations", "Accès à >= 29")
                 contentResolver.loadThumbnail(
                     uri,
                     Size(400, 400),
                     null
                 )
             } else {
-                Bitmap.createScaledBitmap(
-                    Media.getBitmap(
-                        contentResolver,
-                        uri
-                    ), 400, 400, false
-                )
+                Log.d("Informations", "Accès à <29")
+                //Bitmap.createScaledBitmap(
+                //    Media.getBitmap(
+                //        contentResolver,
+                //        uri
+                //    ), 400, 400, false
+                //)
             }
+            return@registerForActivityResult
             val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val b = baos.toByteArray()
             val code = Base64.encodeToString(b, Base64.DEFAULT)
             addMessage(ImageMessage(0, intent.getIntExtra(ViewMemories.MEMORY_ID, 0), code))
+        }
+        else {
+            Log.d("Informations", res.resultCode.toString())
         }
     }
 
